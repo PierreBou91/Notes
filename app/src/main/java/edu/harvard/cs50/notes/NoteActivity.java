@@ -43,6 +43,7 @@ public class NoteActivity extends AppCompatActivity {
 
     public void delete(int id)   {
         MainActivity.database.noteDao().delete(id);
+        finish();
     }
 
 }
