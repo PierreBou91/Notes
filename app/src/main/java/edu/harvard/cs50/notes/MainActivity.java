@@ -52,10 +52,4 @@ public class MainActivity extends AppCompatActivity {
         adapter.reload();
     }
 
-    public void delete(View view)   {
-        Intent intent = getIntent();
-        int id = intent.getIntExtra("id", 0);
-        MainActivity.database.noteDao().delete(id);
-    }
-
 }
