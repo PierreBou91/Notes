@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private NotesAdapter adapter;
     public static NotesDatabase database;
-    public Button delButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,32 +45,12 @@ public class MainActivity extends AppCompatActivity {
                 adapter.reload();
             }
         });
-
-//        Intent intent = getIntent();
-//        int id = intent.getIntExtra("id", 0);
-
-        delButton = (Button) findViewById(R.id.delButton);
-        delButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = getIntent();
-                int id = intent.getIntExtra("id", 0);
-                delete(id);
-            }
-        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         adapter.reload();
-    }
-
-    public void delete(int id)   {
-//        Intent intent = getIntent();
-//        int id = intent.getIntExtra("id", 0);
-
-        database.noteDao().delete(id);
     }
 
 }

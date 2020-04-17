@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class NoteActivity extends AppCompatActivity {
     private EditText editText;
+    public Button delButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,16 @@ public class NoteActivity extends AppCompatActivity {
         Intent intent = getIntent();
         editText = findViewById(R.id.note_edit_text);
         editText.setText(intent.getStringExtra("content"));
+
+        delButton = (Button) findViewById(R.id.delButton);
+        delButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                int id = intent.getIntExtra("id", 0);
+                delete(id);
+            }
+        });
     }
 
     @Override
@@ -29,19 +41,8 @@ public class NoteActivity extends AppCompatActivity {
         MainActivity.database.noteDao().save(editText.getText().toString(), id);
     }
 
-//    @Override
-//    protected void onFinished() {
-//        super.onFinished();
-//
-//        Intent intent = getIntent();
-//        int id = intent.getIntExtra("id", 0);
-//        MainActivity.database.noteDao().delete(id);
-//    }
-
-//    public void delete(View view)   {
-//        Intent intent = getIntent();
-//        int id = intent.getIntExtra("id", 0);
-//        MainActivity.database.noteDao().delete(id);
-//    }
+    public void delete(int id)   {
+        MainActivity.database.noteDao().delete(id);
+    }
 
 }
