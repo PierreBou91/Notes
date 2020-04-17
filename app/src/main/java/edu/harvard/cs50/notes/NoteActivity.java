@@ -26,8 +26,13 @@ public class NoteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", 0);
+        MainActivity.database.noteDao().save(editText.getText().toString(), id);
+    }
+
+    public void onFinish() {
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", 0);
         MainActivity.database.noteDao().delete(id);
-//        MainActivity.database.noteDao().save(editText.getText().toString(), id);
     }
 
 //    public void delete(View view)   {
